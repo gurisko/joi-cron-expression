@@ -1,0 +1,27 @@
+{
+  "name": "joi-cron-expression",
+  "version": "0.0.1",
+  "description": "A Joi validator for cron expressions",
+  "main": "joi-cron-expression.js",
+  "scripts": {
+    "test": "mocha tests.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gurisko/joi-cron-expression.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gurisko/joi-cron-expression/issues"
+  },
+  "homepage": "https://github.com/gurisko/joi-cron-expression#readme",
+  "dependencies": {
+    "cron-parser": "^2.4.3",
+    "joi": "^13.0.2"
+  },
+  "devDependencies": {
+    "expect": "^21.2.1",
+    "mocha": "^4.0.1"
+  }
+}
