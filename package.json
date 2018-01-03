@@ -1,6 +1,6 @@
 {
   "name": "joi-cron-expression",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A Joi validator for cron expressions",
   "main": "joi-cron-expression.js",
   "scripts": {
@@ -17,11 +17,11 @@
   },
   "homepage": "https://github.com/gurisko/joi-cron-expression#readme",
   "dependencies": {
-    "cron-parser": "^2.4.3",
-    "joi": "^13.0.2"
+    "cron-parser": "^2.4.3"
   },
   "devDependencies": {
     "expect": "^21.2.1",
+    "joi": "^13.0.2",
     "mocha": "^4.0.1"
   }
 }
