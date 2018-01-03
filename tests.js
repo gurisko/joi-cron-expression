@@ -1,7 +1,8 @@
 'use strict';
 
 const expect = require('expect');
-const Joi = require('./joi-cron-expression');
+const JoiBase = require('joi');
+const Joi = require('./joi-cron-expression')(JoiBase);
 
 const validCronStrings = [
   '* * * * * *',
@@ -21,27 +22,30 @@ const invalidCronStrings = [
   '0 5 31 2 *',
   'invalid character',
   '@every-other-week',
+  {},
+  12,
+  false,
 ];
 
-it('should validate strings', (done) => {
+it('should succeed when basic string is provided', (done) => {
   const result = Joi.validate('test', Joi.string());
   expect(result.error).toEqual(null, 'should not have an error');
   expect(result.value).toBe('test');
   done();
 });
 
-it('should validate cron strings', (done) => {
+it('should succeed if cron expression is valid', (done) => {
   validCronStrings.forEach(str => {
-    let result = Joi.validate(str, Joi.string().cron());
+    const result = Joi.validate(str, Joi.string().cron());
     expect(result.error).toEqual(null, 'should not have an error');
     expect(result.value).toBe(str);
   });
   done();
 });
 
-it('should not validate invalid cron strings', (done) => {
+it('should fail if cron expression is invalid', (done) => {
   invalidCronStrings.forEach(str => {
-    let result = Joi.validate(str, Joi.string().cron());
+    const result = Joi.validate(str, Joi.string().cron());
     expect(typeof result.error).toBe('object', 'should not be validated without an error');
     expect(result.value).toBe(str);
   });
