@@ -1,7 +1,7 @@
 'use strict';
 
 const expect = require('expect');
-const JoiBase = require('joi');
+const JoiBase = require('@hapi/joi');
 const Joi = require('./joi-cron-expression')(JoiBase);
 
 const validCronStrings = [
@@ -28,16 +28,16 @@ const invalidCronStrings = [
 ];
 
 it('should succeed when basic string is provided', (done) => {
-  const result = Joi.validate('test', Joi.string());
-  expect(result.error).toEqual(null, 'should not have an error');
+  const result = Joi.string().validate('test');
+  expect(result.error).toBeUndefined();
   expect(result.value).toBe('test');
   done();
 });
 
 it('should succeed if cron expression is valid', (done) => {
   validCronStrings.forEach(str => {
-    const result = Joi.validate(str, Joi.string().cron());
-    expect(result.error).toEqual(null, 'should not have an error');
+    const result = Joi.string().cron().validate(str);
+    expect(result.error).toBeUndefined();
     expect(result.value).toBe(str);
   });
   done();
@@ -45,7 +45,7 @@ it('should succeed if cron expression is valid', (done) => {
 
 it('should fail if cron expression is invalid', (done) => {
   invalidCronStrings.forEach(str => {
-    const result = Joi.validate(str, Joi.string().cron());
+    const result = Joi.string().cron().validate(str);
     expect(typeof result.error).toBe('object', 'should not be validated without an error');
     expect(result.value).toBe(str);
   });

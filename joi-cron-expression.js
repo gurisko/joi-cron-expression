@@ -3,24 +3,23 @@
 const cronParser = require('cron-parser');
 
 module.exports = (Joi) => {
-  return Joi.extend((Joi) => ({
-    name: 'string',
+  return Joi.extend({
+    type: 'string',
     base: Joi.string(),
-    language: {
-      cron: 'needs to be a cron expression',
+    messages: {
+      'string.cron': '"{{#value}}" must be a cron expression',
     },
-    rules: [
-      {
-        name: 'cron',
-        validate(params, value, state, options) {
+    rules: {
+      cron: {
+        validate(value, {error}) {
           try {
             cronParser.parseExpression(value);
           } catch (err) {
-            return this.createError('string.cron', {v: value}, state, options);
+            return error('string.cron', {value});
           }
           return value;
-        }
-      }
-    ]
-  }));
+        },
+      },
+    },
+  });
 };

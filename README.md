@@ -9,5 +9,5 @@ npm install joi-cron-expression
 ```javascript
 const Joi = require('joi-cron-expression')(require('joi'));
 
-Joi.validate('*/5 * * * *', Joi.string().cron());
+Joi.string().cron().validate('*/5 * * * *');
 ```
