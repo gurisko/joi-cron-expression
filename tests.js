@@ -1,7 +1,7 @@
 'use strict';
 
 const expect = require('expect');
-const JoiBase = require('@hapi/joi');
+const JoiBase = require('joi');
 const Joi = require('./joi-cron-expression')(JoiBase);
 
 const validCronStrings = [
